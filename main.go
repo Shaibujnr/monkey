@@ -1,13 +1,19 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+	"os/user"
 
-type Person struct {
-	name string
-	age  int
-	ch   byte
-}
+	"github.com/Shaibujnr/monkey/repl"
+)
 
 func main() {
-	fmt.Println(&Person{ch: 25})
+	user, err := user.Current()
+	if err != nil {
+		panic(err)
+	}
+	fmt.Printf("Hello %s! This is the Monkey programming language!\n", user.Username)
+	fmt.Printf("Feel free to type in commands\n")
+	repl.Start(os.Stdin, os.Stdout)
 }
